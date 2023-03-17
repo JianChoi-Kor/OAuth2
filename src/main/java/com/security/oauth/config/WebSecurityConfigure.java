@@ -42,17 +42,16 @@ public class WebSecurityConfigure {
         http.oauth2Login()
                 .authorizationEndpoint()
                 .baseUri("/oauth2/authorize")
-                .authorizationRequestRepository()
+//                .authorizationRequestRepository()
                 .and()
                 .redirectionEndpoint()
                 .baseUri("/oauth2/callback/*")
                 .and()
                 .userInfoEndpoint()
-                .userService(customOAuth2UserService)
-                .and()
-                .successHandler()
-                .failureHandler();
-
+                .userService(customOAuth2UserService);
+//                .and()
+//                .successHandler()
+//                .failureHandler();
 
         //jwt filter 설정
         http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
