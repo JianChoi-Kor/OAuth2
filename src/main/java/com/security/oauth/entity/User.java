@@ -16,9 +16,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String oAuth2Id;
+
     private String name;
 
     private String email;
+
+    private String profileImageUrl;
 
     @Enumerated(EnumType.STRING)
     private Role role;
