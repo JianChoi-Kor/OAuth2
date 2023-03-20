@@ -5,40 +5,24 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 import java.util.Map;
 
-public class NaverOAuth2User implements CustomOAuth2User {
+public class NaverOAuth2User extends OAuth2UserInfo {
+
+    public NaverOAuth2User(Map<String, Object> attributes) {
+        super(attributes);
+    }
 
     @Override
     public String getOAuth2Id() {
-        return null;
+        return (String) attributes.get("response");
     }
 
     @Override
     public String getEmail() {
-        return null;
-    }
-
-    @Override
-    public String getNickname() {
-        return null;
-    }
-
-    @Override
-    public String getNameAttributeKey() {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return null;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return (String) attributes.get("email");
     }
 
     @Override
     public String getName() {
-        return null;
+        return (String) attributes.get("name");
     }
 }

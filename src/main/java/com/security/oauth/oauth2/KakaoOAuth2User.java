@@ -1,44 +1,25 @@
 package com.security.oauth.oauth2;
 
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 import java.util.Map;
 
-public class KakaoOAuth2User implements CustomOAuth2User {
+public class KakaoOAuth2User extends OAuth2UserInfo {
+
+    public KakaoOAuth2User(Map<String, Object> attributes) {
+        super(attributes);
+    }
 
     @Override
     public String getOAuth2Id() {
-        return null;
+        return (String) attributes.get("id");
     }
 
     @Override
     public String getEmail() {
-        return null;
-    }
-
-    @Override
-    public String getNickname() {
-        return null;
-    }
-
-    @Override
-    public String getNameAttributeKey() {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return null;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return (String) attributes.get("email");
     }
 
     @Override
     public String getName() {
-        return null;
+        return (String) attributes.get("name");
     }
 }
