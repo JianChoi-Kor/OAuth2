@@ -20,6 +20,9 @@ public class WebSecurityConfigure {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final JwtTokenProvider jwtTokenProvider;
 
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //httpBasic, csrf, formLogin, rememberMe, logout, session disable
@@ -30,7 +33,7 @@ public class WebSecurityConfigure {
                 .csrf().disable()
                 .formLogin().disable()
                 .rememberMe().disable()
-                .logout().disable()
+//                .logout().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         //요청에 대한 권한 설정
@@ -47,11 +50,16 @@ public class WebSecurityConfigure {
                 .redirectionEndpoint()
                 .baseUri("/oauth2/callback/*")
                 .and()
+                //userService()는 OAuth2 인증 과정에서 Authentication 생성에 필요한 OAuth2User 를 반환하는 클래스를 지정한다.
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
 //                .and()
 //                .successHandler()
 //                .failureHandler();
+
+        //로그아웃 관련 처리(jwt 를 사용하기 때문에 token 및 JSESSIONID 를 custom 으로 둘 다 처리해줘야 할 듯
+        http.logout()
+                .deleteCookies("JSESSIONID");
 
         //jwt filter 설정
         http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
