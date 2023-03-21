@@ -22,7 +22,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         //OAuth2 로그인 진행중인 서비스 구분
         String registrationId = oAuth2UserRequest.getClientRegistration().getRegistrationId();
-
         //nameAttributeKey OAuth2 로그인 진행 시 키가 되는 필드를 가리킨다.
         //구글의 경우 기본적으로 'sub' 로 지원하지만, 네이버와 카카오는 기본 지원을 하지 않는다.
         //OAuth2 로그인 시 키 값(google: "sub", naver: "response", kakao: "id")
