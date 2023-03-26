@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class User {
+public class User extends BaseDateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
