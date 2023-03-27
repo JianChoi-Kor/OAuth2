@@ -1,5 +1,8 @@
 package com.security.oauth.oauth2;
 
+import com.security.oauth.entity.User;
+import com.security.oauth.enums.AuthProvider;
+import com.security.oauth.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,4 +18,16 @@ public abstract class OAuth2UserInfo {
     public abstract String getOAuth2Id();
     public abstract String getEmail();
     public abstract String getName();
+
+    public User createUser(AuthProvider authProvider) {
+        User user = User.builder()
+                .email(getEmail())
+                .name(getName())
+                .oAuth2Id(getOAuth2Id())
+                .authProvider(authProvider)
+                .role(Role.ROLE_USER)
+                .build();
+
+        return user;
+    }
 }
