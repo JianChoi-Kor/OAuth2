@@ -43,6 +43,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 throw new RuntimeException("Email already signed up.");
             }
             userRepository.save(user.updateUser(oAuth2UserInfo));
+
         }
         //가입되지 않은 경우
         else {
