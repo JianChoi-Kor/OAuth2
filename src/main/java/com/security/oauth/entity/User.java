@@ -23,7 +23,7 @@ public class User extends BaseDateEntity {
 
     private String name;
 
-    private String oAuth2Id;
+    private String oauth2Id;
 
     @Enumerated(EnumType.STRING)
     private AuthProvider authProvider;
@@ -31,9 +31,9 @@ public class User extends BaseDateEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User updateUser(OAuth2UserInfo oAuth2UserInfo) {
+    public User update(OAuth2UserInfo oAuth2UserInfo) {
         this.name = oAuth2UserInfo.getName();
-        this.oAuth2Id = oAuth2UserInfo.getOAuth2Id();
+        this.oauth2Id = oAuth2UserInfo.getOAuth2Id();
 
         return this;
     }

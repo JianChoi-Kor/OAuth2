@@ -28,6 +28,7 @@ public class CookieAuthorizationRequestRepository implements AuthorizationReques
         if (authorizationRequest == null) {
             CookieUtil.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
             CookieUtil.deleteCookie(request, response, REDIRECT_URI_PARAM_COOKIE_NAME);
+            return;
         }
 
         CookieUtil.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, CookieUtil.serialize(authorizationRequest), COOKIE_EXPIRE_SECONDS);
