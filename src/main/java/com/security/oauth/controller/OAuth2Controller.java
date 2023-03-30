@@ -15,6 +15,7 @@ public class OAuth2Controller {
         if (StringUtils.isNotBlank(error)) {
             return error;
         } else {
+
             System.out.println("token : " + token);
             return token;
         }
