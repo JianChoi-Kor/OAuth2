@@ -13,6 +13,7 @@ public class OAuth2Controller {
     @GetMapping("/redirect")
     public String getToken(@Nullable String token, @Nullable String error) {
         if (StringUtils.isNotBlank(error)) {
+
             return error;
         } else {
             System.out.println("token : " + token);
