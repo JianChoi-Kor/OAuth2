@@ -40,7 +40,7 @@ public class WebSecurityConfigure {
 
         //요청에 대한 권한 설정
         http.authorizeRequests()
-                .antMatchers("/oauth2/**").permitAll()
+                .antMatchers("/oauth2/**", "/logout").permitAll()
                 .anyRequest().authenticated();
 
         //oauth2Login
@@ -59,8 +59,8 @@ public class WebSecurityConfigure {
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .failureHandler(oAuth2AuthenticationFailureHandler);
 
-        //로그아웃 관련 처리(jwt 를 사용하기 때문에 token 및 JSESSIONID 를 custom 으로 둘 다 처리해줘야 할 듯
         http.logout()
+                .clearAuthentication(true)
                 .deleteCookies("JSESSIONID");
 
         //jwt filter 설정
