@@ -56,7 +56,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         //JWT 생성
         UserResponseDto.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
 
-        return UriComponentsBuilder.fromUriString("http://localhost:8778/oauth2/redirect")
+        return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", tokenInfo.getAccessToken())
                 .build().toUriString();
     }
