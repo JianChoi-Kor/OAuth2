@@ -5,10 +5,11 @@ import org.springframework.util.SerializationUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Optional;
 
-public class CookieUtil {
+public class CookieUtils {
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
@@ -22,12 +23,12 @@ public class CookieUtil {
         return Optional.empty();
     }
 
-//    public static Optional<String> readServletCookie(HttpServletRequest request, String name) {
-//        return Arrays.stream(request.getCookies())
-//                .filter(cookie -> name.equals(cookie.getName()))
-//                .map(Cookie::getValue)
-//                .findAny();
-//    }
+    public static Optional<String> readServletCookie(HttpServletRequest request, String name) {
+        return Arrays.stream(request.getCookies())
+                .filter(cookie -> name.equals(cookie.getName()))
+                .map(Cookie::getValue)
+                .findAny();
+    }
 
     public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, value);

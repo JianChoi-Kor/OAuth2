@@ -2,7 +2,7 @@ package com.security.oauth.oauth2;
 
 import com.security.oauth.dto.UserResponseDto;
 import com.security.oauth.jwt.JwtTokenProvider;
-import com.security.oauth.lib.CookieUtil;
+import com.security.oauth.lib.CookieUtils;
 import com.security.oauth.repository.CookieAuthorizationRequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        Optional<String> redirectUri = CookieUtil.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
+        Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
 
         if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {

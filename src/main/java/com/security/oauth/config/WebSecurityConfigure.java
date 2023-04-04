@@ -40,21 +40,18 @@ public class WebSecurityConfigure {
 
         //요청에 대한 권한 설정
         http.authorizeRequests()
-                .antMatchers("/oauth2/**", "/logout").permitAll()
+                .antMatchers("/oauth2/**").permitAll()
                 .anyRequest().authenticated();
 
         //oauth2Login
         http.oauth2Login()
-                .authorizationEndpoint()
-                .baseUri("/oauth2/authorize")
-                .authorizationRequestRepository(cookieAuthorizationRequestRepository)
+                .authorizationEndpoint().baseUri("/oauth2/authorize")  // 소셜 로그인 url
+                .authorizationRequestRepository(cookieAuthorizationRequestRepository)  // 인증 요청을 cookie 에 저장
                 .and()
-                .redirectionEndpoint()
-                .baseUri("/oauth2/callback/*")
+                .redirectionEndpoint().baseUri("/oauth2/callback/*")  // 소셜 인증 후 redirect url
                 .and()
                 //userService()는 OAuth2 인증 과정에서 Authentication 생성에 필요한 OAuth2User 를 반환하는 클래스를 지정한다.
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService)
+                .userInfoEndpoint().userService(customOAuth2UserService)  // 회원 정보 처리
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .failureHandler(oAuth2AuthenticationFailureHandler);
